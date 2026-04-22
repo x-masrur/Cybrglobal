@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cybr. | Asia Launching Soon</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --bg: #050505;
+            --card-bg: rgba(20, 20, 25, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.3);
+            --text-head: #ffffff;
+            --text-body: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-body);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-head);
+        }
+
+        .mesh-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        .container {
+            padding: 0 24px;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-box {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .dropdown { position: relative; }
+
+        .dropdown-trigger {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            color: var(--text-head);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 200px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 8px;
+            backdrop-filter: blur(20px);
+            display: none;
+            z-index: 1000;
+        }
+
+        .dropdown.active .dropdown-menu { display: block; }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 12px;
+        }
+
+        .dropdown-item.active { color: var(--accent); font-weight: 600; }
+
+        /* --- COMING SOON CONTENT --- */
+        .coming-soon-hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .badge {
+            background: var(--accent-glow);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .coming-soon-hero h1 {
+            font-size: clamp(3rem, 10vw, 4.5rem);
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .coming-soon-hero h1 span {
+            background: linear-gradient(to right, #fff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .coming-soon-hero p {
+            max-width: 450px;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* --- WAITLIST FORM --- */
+        .waitlist-form {
+            width: 100%;
+            max-width: 450px;
+            background: var(--card-bg);
+            padding: 8px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .waitlist-form input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 16px;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .waitlist-form input:focus { outline: none; }
+
+        .btn-submit {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-family: 'Outfit';
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-submit:active { transform: scale(0.95); }
+
+        /* --- FOOTER CONTACT --- */
+        .footer-minimal {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-minimal a {
+            color: var(--text-head);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-minimal a:hover { color: var(--accent); }
+
+        @media (max-width: 480px) {
+            .waitlist-form { flex-direction: column; padding: 16px; }
+            .btn-submit { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mesh-gradient"></div>
+
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <div class="logo-box"><i data-lucide="shield-check" size="20" stroke-width="3"></i></div>
+                Cybr.
+            </div>
+
+            <div class="nav-right">
+                <div class="dropdown" id="countryDropdown">
+                    <div class="dropdown-trigger">
+                        <i data-lucide="globe" size="14"></i> ASIA <i data-lucide="chevron-down" size="14"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="index.html" class="dropdown-item">Bangladesh</a>
+                        <a href="eu-support.html" class="dropdown-item">European Union</a>
+                        <a href="#" class="dropdown-item active">Asia <i data-lucide="check" size="14"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section class="coming-soon-hero">
+            <div class="badge">Next Frontier</div>
+            <h1>Asia is <span>Coming Soon.</span></h1>
+            <p>Bringing elite cyber incident response and asset recovery to the Asian digital ecosystem.</p>
+
+            <form class="waitlist-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn-submit">Notify Me</button>
+            </form>
+        </section>
+
+        <footer class="footer-minimal">
+            <a href="mailto:masrurxyz@outlook.com">
+                <i data-lucide="mail" size="18"></i> masrurxyz@outlook.com
+            </a>
+            <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 16px; opacity: 0.4;">
+                © 2026 Cybr. Global Operations
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Dropdown Toggle
+        const dropdown = document.getElementById('countryDropdown');
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            dropdown.classList.remove('active');
+        });
+
+        // Form Submission Mockup
+        document.querySelector('.waitlist-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('You have been added to the Asia launch waitlist.');
+        });
+    </script>
+</body>
+</html>

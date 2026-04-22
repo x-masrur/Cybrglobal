@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cybr. | Bangladesh Support</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --bg: #050505;
+            --card-bg: rgba(20, 20, 25, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #6366f1; /* Indigo */
+            --accent-glow: rgba(99, 102, 241, 0.3);
+            --text-head: #ffffff;
+            --text-body: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-body);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-head);
+        }
+
+        /* --- BACKGROUND GRADIENT --- */
+        .mesh-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        .container {
+            padding: 0 24px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- NAVIGATION & DROPDOWN --- */
+        nav {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-box {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-trigger {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--border);
+            color: var(--text-head);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 200px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 8px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+            animation: slideIn 0.2s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-head);
+        }
+
+        .dropdown-item.active {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .soon-badge {
+            font-size: 0.6rem;
+            background: var(--accent-glow);
+            color: var(--accent);
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .status {
+            background: rgba(255,255,255,0.05);
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 40px 0 60px;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 0.95;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero span {
+            background: linear-gradient(to right, #fff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- FEATURES --- */
+        .features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 24px;
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .icon-wrap {
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 8px;
+            font-size: 1.25rem;
+        }
+
+        /* --- ABOUT & FOUNDER --- */
+        .about-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .founder-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 40px 24px;
+            margin-top: 40px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .founder-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+
+        .founder-card .role {
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .founder-card .bio {
+            max-width: 450px;
+            margin: 0 auto 30px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .direct-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--text-head);
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .contact-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--accent);
+        }
+
+        /* --- FORM --- */
+        .form-section {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 32px 24px;
+            border: 1px solid var(--border);
+            margin-bottom: 120px;
+        }
+
+        .form-section h2 { margin-bottom: 8px; font-size: 1.8rem; }
+        .form-section p { margin-bottom: 32px; font-size: 0.95rem; }
+
+        .input-box { margin-bottom: 24px; text-align: left; }
+
+        .input-box label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: #64748b;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.07);
+        }
+
+        .btn {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 18px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 30px var(--accent-glow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .btn:active { transform: scale(0.96); }
+
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            left: 24px;
+            right: 24px;
+            z-index: 100;
+        }
+
+        /* --- DESKTOP ADAPTATIONS --- */
+        @media (min-width: 768px) {
+            .features { grid-template-columns: repeat(3, 1fr); max-width: 1000px; margin: 0 auto 60px; }
+            .container { max-width: 1000px; }
+            .hero h1 { font-size: 5rem; text-align: center; }
+            .hero p { text-align: center; max-width: 600px; margin: 0 auto; }
+            .form-section { max-width: 500px; margin-left: auto; margin-right: auto; }
+            .fab { display: none; }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="mesh-gradient"></div>
+
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <div class="logo-box">
+                    <i data-lucide="shield-check" size="20" stroke-width="3"></i>
+                </div>
+                Cybr.
+            </div>
+
+            <div class="nav-right">
+                <div class="dropdown" id="countryDropdown">
+                    <div class="dropdown-trigger">
+                        <i data-lucide="globe" size="14"></i> BD <i data-lucide="chevron-down" size="14"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item active">
+                            Bangladesh <i data-lucide="check" size="14"></i>
+                        </a>
+                        <a href="eu-support.html" class="dropdown-item">
+                            European Union
+                        </a>
+                        <a href="asia-support.html" class="dropdown-item">Asia <span class="soon-badge">Soon</span></a>
+                    </div>
+                </div>
+
+                <div class="status">
+                    <div class="dot"></div> Agent Online
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <h1>Digital <span>Defense</span> for the Modern Era.</h1>
+            <p>Elite-level recovery and legal support for victims of cybercrime. We act fast so you can recover faster.</p>
+        </section>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="icon-wrap"><i data-lucide="fingerprint"></i></div>
+                <h3>Identity</h3>
+                <p>Advanced recovery for stolen social and corporate identities.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap"><i data-lucide="banknote"></i></div>
+                <h3>Assets</h3>
+                <p>Tracing and intercepting fraudulent financial transactions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap"><i data-lucide="gavel"></i></div>
+                <h3>Legal</h3>
+                <p>Airtight forensic documentation for law enforcement.</p>
+            </div>
+        </div>
+     
+        <section class="about-section">
+            <h2>Behind the Idea</h2>
+            <div class="founder-card">
+                <img src="dev.png" alt="Founder" class="founder-img">
+                <h3>Masrur Ahmmed</h3>
+                <span class="role">Lead Architect & Visionary</span>
+                <p class="bio">
+                    Driven by the rising wave of digital insecurity, Masrur founded Cybr. to bridge the gap between technical recovery and legal justice. His goal is to ensure no victim of cybercrime has to fight the digital dark alone.
+                </p>
+                <div class="direct-contact">
+                    <a href="mailto:masrurxyz@hotmail.com" class="contact-item">
+                        <i data-lucide="mail" size="18"></i> masrurxyz@hotmail.com
+                    </a>
+                    <a href="tel:+8809658011567" class="contact-item">
+                        <i data-lucide="phone" size="18"></i> +880 9658011567
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section" id="report">
+            <h2>Secure Report</h2>
+            <p>Fill out the details below. All data is end-to-end encrypted.</p>
+            
+            <form>
+                <div class="input-box">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your name" required>
+                </div>
+                <div class="input-box">
+                    <label>Emergency Contact</label>
+                    <input type="tel" placeholder="+880 1xxx-xxxxxx" required>
+                </div>
+                <div class="input-box">
+                    <label>Case Type</label>
+                    <select required>
+                        <option value="" disabled selected>Select option</option>
+                        <option>Financial Fraud</option>
+                        <option>Account Takeover</option>
+                        <option>Cyber Extortion</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <label>Description</label>
+                    <textarea rows="4" placeholder="What happened?" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn">
+                    Launch Investigation <i data-lucide="arrow-right" size="18"></i>
+                </button>
+            </form>
+        </section>
+    </div>
+    
+
+    <div class="fab">
+        <button class="btn" onclick="document.getElementById('report').scrollIntoView({behavior: 'smooth'})">
+            <i data-lucide="alert-circle" size="18"></i> Report Incident Now
+        </button>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Dropdown Toggle Logic
+        const dropdown = document.getElementById('countryDropdown');
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            dropdown.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
